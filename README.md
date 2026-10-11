@@ -2,6 +2,8 @@
 
 fairtourism.nl 改版的可交互原型，包含 Web 和手机两种预览。原型沿用基金会现有的品牌、Poppins 字体和原站内容，按访客目的重新组织网站结构。表单、订阅和捐款都只是演示，不会发送或保存任何数据。
 
+**在线预览：** https://wyynnewang-nl.github.io/fair-tourism-website-redesign/ （推送到 `main` 后由 GitHub Actions 自动打包发布）。页面顶部标注 “Prototype · not the official Fair Tourism website”，并设置了禁止搜索引擎收录。
+
 ## 本地运行
 
 ```sh

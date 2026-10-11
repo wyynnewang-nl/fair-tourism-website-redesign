@@ -19,6 +19,7 @@
 }
 
 .ft-site *, .ft-site *::before, .ft-site *::after { box-sizing: border-box; }
+.ft-prototype-badge { margin: 0; padding: 5px 16px; background: var(--ft-ink); color: #fff; font-size: 10px; font-weight: 600; line-height: 1.4; text-align: center; letter-spacing: .02em; }
 .ft-site button, .ft-site input, .ft-site select, .ft-site textarea { font: inherit; }
 .ft-site button { color: inherit; }
 .ft-site button:focus-visible, .ft-site a:focus-visible, .ft-site input:focus-visible, .ft-site select:focus-visible, .ft-site textarea:focus-visible { outline: 3px solid var(--ft-saffron); outline-offset: 3px; }

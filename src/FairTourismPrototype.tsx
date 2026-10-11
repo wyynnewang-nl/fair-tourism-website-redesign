@@ -453,6 +453,7 @@ function App() {
         <div className={isEmbeddedSite ? "" : "ft-preview-device ft-preview-device-web"}>
           <div className={isEmbeddedSite ? "" : "ft-preview-viewport"}>
     <div className="ft-site" ref={siteRef}>
+      <p className="ft-prototype-badge">Prototype · not the official Fair Tourism website</p>
       <header className="ft-header">
         <div className="ft-header-inner">
           <a className="ft-wordmark" href="#/" onClick={(event) => { event.preventDefault(); navigate("home"); }} aria-label="Fair Tourism home">

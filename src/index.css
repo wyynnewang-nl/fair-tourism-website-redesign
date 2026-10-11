@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Sans+SC:wght@400;500;600;700&family=Nunito+Sans:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+:root {
+  font-family: 'DM Sans', 'Noto Sans SC', sans-serif;
+  color: #1d3029;
+  background: #f6f7f3;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  --ink: #1d3029;
+  --muted: #68736c;
+  --line: #dfe5dd;
+  --paper: #f6f7f3;
+  --white: #fff;
+  --forest: #1f4739;
+  --moss: #6b8067;
+  --lime: #d8e68a;
+  --coral: #d87860;
+  --blue: #658f96;
+  --serif: 'Newsreader', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, a { font: inherit; }
+button { color: inherit; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible { outline: 2px solid #d87860; outline-offset: 3px; }
+::selection { color: var(--ink); background: var(--lime); }

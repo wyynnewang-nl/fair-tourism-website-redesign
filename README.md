@@ -2,7 +2,23 @@
 
 fairtourism.nl 改版的可交互原型，包含 Web 和手机两种预览。原型沿用基金会现有的品牌、Poppins 字体和原站内容，按访客目的重新组织网站结构。表单、订阅和捐款都只是演示，不会发送或保存任何数据。
 
-**在线预览：** https://wyynnewang-nl.github.io/fair-tourism-website-redesign/ （推送到 `main` 后由 GitHub Actions 自动打包发布）。页面顶部标注 “Prototype · not the official Fair Tourism website”，并设置了禁止搜索引擎收录。
+## 链接
+
+**在线原型**（GitHub Pages，推送到 `main` 后由 GitHub Actions 约 1 分钟自动打包发布）
+
+- 入口页（选择 Web 或手机预览）：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/
+- Web 预览：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/?view=web#/
+- 手机预览：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/?view=mobile#/
+- UI 规范页：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/?view=system
+- 单个页面可在网址后加路径，例如 Resources：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/?view=web#/resources
+
+页面顶部标注 “Prototype · not the official Fair Tourism website”，并设置了禁止搜索引擎收录。仓库是公开的，链接请只在团队内部传播。
+
+**源代码**：https://github.com/wyynnewang-nl/fair-tourism-website-redesign
+
+**英文说明页**（改进总结、结构线框图、原站与原型对比截图）：https://claude.ai/artifact/VN6mCPNmJmfiwfdyoNk3ag 。该页面默认私密，需由所有者在页面的 Share 菜单中设置分享后，团队成员才能打开。
+
+**当前网站**：https://www.fairtourism.nl
 
 ## 本地运行
 
@@ -11,7 +27,7 @@ npm install
 npm run dev
 ```
 
-打开终端里显示的地址（默认 `http://localhost:5173/`）后，可以从入口页选择预览方式，也可以直接访问：
+打开终端里显示的地址（默认 `http://localhost:5173/`）后，可以从入口页选择预览方式，也可以直接访问下面的地址。需要让同一 Wi-Fi 下的同事访问时，用 `npm run dev -- --port 5174 --host` 启动，再把地址里的 `localhost` 换成本机局域网 IP（例如 `http://192.168.1.84:5174/`）。
 
 - `?view=web#/`：Web 页面预览
 - `?view=mobile#/`：390 px 手机预览
@@ -26,6 +42,7 @@ npm run dev
 - `WEBSITE-PAGE-FRAMES.md`：各页面的内容框架草图。
 - `UI-SYSTEM.md`：Web 与手机端界面规范。
 - `CONTENT-GAPS.md`：原站 35 个页面与原型的内容对比，以及已补回和待确认的内容。
+- `docs/redesign-summary/`：英文说明页的源文件和 21 张对比截图（2026 年 10 月拍摄），即上面 claude.ai 说明页发布的内容。用浏览器直接打开 `fair-tourism-redesign.html` 即可离线查看。
 
 ## 内容来源与待确认事项
 

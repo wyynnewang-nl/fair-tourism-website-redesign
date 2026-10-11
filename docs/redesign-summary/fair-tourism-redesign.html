@@ -1,0 +1,474 @@
+<title>Fair Tourism Website Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&display=swap">
+<style>
+/* Layout: a single reading column (~68ch) that widens for side-by-side screenshot pairs and structure diagrams. */
+:root {
+  --bg: #f6f8f4;
+  --surface: #ffffff;
+  --sunk: #e9f0ea;
+  --ink: #173b37;
+  --muted: #5b6f67;
+  --line: #d4dfd7;
+  --forest: #124f49;
+  --coral: #c9524e;
+  --coral-soft: #fbe5e3;
+  --gold: #8a6512;
+  --gold-soft: #f7ecd2;
+  --teal-soft: #dcefe8;
+  --display: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+  --wide: 1120px;
+  --read: 68ch;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1c1a; --surface: #152724; --sunk: #1b302c; --ink: #e4eee8; --muted: #a6b9b1; --line: #2c4540;
+    --forest: #7fc8b6; --coral: #f08c87; --coral-soft: #3a2422; --gold: #e8c46e; --gold-soft: #33291a; --teal-soft: #1d3a34;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1c1a; --surface: #152724; --sunk: #1b302c; --ink: #e4eee8; --muted: #a6b9b1; --line: #2c4540;
+  --forest: #7fc8b6; --coral: #f08c87; --coral-soft: #3a2422; --gold: #e8c46e; --gold-soft: #33291a; --teal-soft: #1d3a34;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.65; }
+.page { max-width: var(--wide); margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); padding-block: 48px 96px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(30px, 4.4vw, 46px); letter-spacing: -0.01em; }
+h2 { font-size: clamp(22px, 2.6vw, 30px); }
+h3 { font-size: 17px; }
+p { margin: 0; }
+a { color: var(--forest); }
+a:focus-visible, summary:focus-visible { outline: 3px solid var(--coral); outline-offset: 2px; }
+.label { font-family: var(--body); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--forest); }
+.lede { max-width: var(--read); font-size: 18px; color: var(--muted); }
+.read { max-width: var(--read); }
+section { margin-top: 72px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 22px; }
+section > *, .shot-pair > * { min-width: 0; }
+.section-head { display: grid; gap: 8px; max-width: var(--read); }
+.section-head p { color: var(--muted); }
+
+/* Masthead */
+.mast { display: grid; gap: 20px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+.facts { display: flex; flex-wrap: wrap; gap: 10px 28px; color: var(--muted); font-size: 14px; }
+.facts b { color: var(--ink); font-weight: 700; }
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+.toc a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font-size: 14px; text-decoration: none; }
+.toc a:hover { border-color: var(--forest); }
+
+/* Improvements */
+.wins { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.win { display: grid; gap: 10px; align-content: start; padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.win p { color: var(--muted); font-size: 15px; }
+.win ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 15px; display: grid; gap: 4px; }
+.before { font-size: 14px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; }
+.before b { color: var(--coral); font-weight: 700; }
+
+/* Structure diagrams */
+.compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.compare > div { min-width: 0; display: grid; gap: 12px; align-content: start; }
+.col-title { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; font-family: var(--display); font-weight: 600; font-size: 16px; }
+.col-title small { font-family: var(--body); font-weight: 600; font-size: 13px; color: var(--muted); }
+.tree { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.tree > li { padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+.tree > li > strong { font-family: var(--display); font-weight: 600; font-size: 14px; }
+.tree ul { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 0; padding: 0; list-style: none; }
+.tree ul li { padding: 2px 8px; border-radius: 4px; background: var(--sunk); font-size: 13px; }
+.tree .cta { border-color: var(--coral); }
+.note { font-size: 13px; color: var(--muted); }
+.flag { color: var(--coral); font-weight: 700; }
+
+.stack { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; counter-reset: block; }
+.stack li { counter-increment: block; display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; align-items: center; min-height: 44px; padding: 8px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-size: 14px; }
+.stack li::before { content: counter(block); color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.stack li.tall { min-height: 72px; }
+.stack li span { min-width: 0; }
+.stack li small { display: block; color: var(--muted); font-size: 12px; }
+.tag { font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 7px; border-radius: 4px; white-space: nowrap; }
+.tag.new { background: var(--gold-soft); color: var(--gold); }
+.tag.moved { background: var(--teal-soft); color: var(--forest); }
+.tag.cut { background: var(--coral-soft); color: var(--coral); }
+.legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--muted); align-items: center; }
+
+/* Screenshots */
+.shot-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; }
+.shot-pair header { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+.shot-pair header p { color: var(--muted); font-size: 15px; max-width: 70ch; }
+.shots { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+figure { margin: 0; display: grid; gap: 6px; min-width: 0; }
+figure img { width: 100%; max-width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 4px; background: var(--sunk); }
+figcaption { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.empty-shot { display: grid; place-items: center; aspect-ratio: 16 / 10; max-width: 100%; padding: 20px; border: 1px dashed var(--line); border-radius: 4px; background: var(--sunk); color: var(--muted); text-align: center; font-size: 14px; }
+.tall-pair { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; align-items: start; }
+.scroller { max-height: 640px; overflow-y: auto; border: 1px solid var(--line); border-radius: 4px; }
+.scroller img { border: 0; border-radius: 0; }
+.phone img { max-width: 260px; }
+
+/* Table */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: 15px; }
+th, td { padding: 12px 16px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+th { font-family: var(--display); font-weight: 600; font-size: 14px; background: var(--sunk); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 700; white-space: nowrap; }
+td:nth-child(2) { color: var(--muted); }
+
+.lists { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+.box { padding: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; display: grid; gap: 12px; align-content: start; }
+.box ul { margin: 0; padding-left: 18px; display: grid; gap: 8px; font-size: 15px; }
+.box li span { color: var(--muted); }
+.foot { margin-top: 72px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; display: grid; gap: 6px; }
+code { font-size: 0.92em; padding: 1px 5px; border-radius: 4px; background: var(--sunk); }
+
+@media (max-width: 760px) {
+  .compare, .shots { grid-template-columns: 1fr; }
+  .tall-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phone img { max-width: 100%; }
+  section { margin-top: 56px; }
+}
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<main class="page">
+  <header class="mast">
+    <p class="label">Website review · October 2026</p>
+    <h1>Fair Tourism website redesign: what changed and why</h1>
+    <p class="lede">An interactive web and mobile prototype for fairtourism.nl. It keeps the Foundation's voice, colours and Poppins typeface, and reorganises the site around what visitors come to do: understand the work, support it, partner with the team or learn about community tourism.</p>
+    <div class="facts">
+      <span><b>35</b> pages of the current site reviewed</span>
+      <span><b>12</b> page templates prototyped</span>
+      <span>Tested at <b>1440 px</b> and <b>390 px</b> wide</span>
+      <span><b>13</b> articles migrated with authors and dates</span>
+    </div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#improvements">Main improvements</a>
+      <a href="#structure">Site structure</a>
+      <a href="#wireframes">Page wireframes</a>
+      <a href="#screens">Before and after</a>
+      <a href="#pages">Page by page</a>
+      <a href="#issues">Issues found</a>
+      <a href="#launch">Before launch</a>
+    </nav>
+  </header>
+
+  <section id="improvements">
+    <div class="section-head">
+      <p class="label">Main improvements</p>
+      <h2>The biggest changes are in structure and content, not decoration.</h2>
+      <p>The prototype reuses the existing brand. Most of the work went into making information easier to find, easier to trust and easier to act on.</p>
+    </div>
+    <div class="wins">
+      <article class="win">
+        <h3>Navigation named after what visitors want to do</h3>
+        <p>About · What we do · Our work · Our impact · Resources, with “Donate now” as the primary button and “Partner with us” as a clearly secondary one.</p>
+        <p class="before"><b>Current site:</b> “Our Work” lists services, “Our Projects” opens a page titled “Our Impact”, and two different addresses show the same page.</p>
+      </article>
+      <article class="win">
+        <h3>A homepage that routes visitors by intent</h3>
+        <p>Three entry points (discover projects, explore a partnership, support the work) and the five-step method from the two-pager: Consider, Conceive, Craft, Connect, Conserve.</p>
+        <p class="before"><b>Current site:</b> eleven stacked sections with several repeated calls to action; visitors work out for themselves where to start.</p>
+      </article>
+      <article class="win">
+        <h3>Project pages that lead with facts</h3>
+        <p>A quick-facts bar at the top (project lead, location, period, focus, scale), then why it matters, key challenges and activities, approach, goals, film and a community voice.</p>
+        <p class="before"><b>Current site:</b> the same facts exist but sit in a side box further down the page.</p>
+      </article>
+      <article class="win">
+        <h3>Research and training made visible</h3>
+        <p>TOURLINK (EU-funded, 2020–2024) and the Travelife human rights training now have their own pages under Our work, with links to the published research.</p>
+        <p class="before"><b>Current site:</b> both are small tiles on the projects page and easy to miss.</p>
+      </article>
+      <article class="win">
+        <h3>An Our impact page that is careful with numbers</h3>
+        <p>The eight figures from the two-pager are grouped into four snapshots. Each states what it counts and carries a “reporting period to confirm” note. Figures with different definitions are never charted against each other.</p>
+        <p class="before"><b>Current site:</b> there is no dedicated impact page.</p>
+      </article>
+      <article class="win">
+        <h3>One searchable resource library</h3>
+        <ul>
+          <li>Insights, blog posts and reports in one place, filtered by four topics and searchable</li>
+          <li>Thirteen articles migrated with full text, author and date</li>
+          <li>Six items load at a time, then “Show more resources”</li>
+          <li>The two-page brochure and the six partner logos sit below the list</li>
+        </ul>
+      </article>
+      <article class="win">
+        <h3>One design system across web and mobile</h3>
+        <ul>
+          <li>Shared type scale, spacing, colours, buttons and form states</li>
+          <li>Every page checked at phone width with no sideways scrolling</li>
+          <li>Visible keyboard focus and descriptive image text</li>
+          <li>Gentle float-in motion and a pausable hero film, both switched off when visitors ask for reduced motion</li>
+        </ul>
+      </article>
+      <article class="win">
+        <h3>Donation page with the purpose beside the form</h3>
+        <p>Four uses of funds, each with concrete activities, sit next to the amount selector. Amounts match the current Donorbox form (€10, €50, €100 or another amount, one-time or monthly), so the block can connect to the existing Donorbox and Stripe setup.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="structure">
+    <div class="section-head">
+      <p class="label">Site structure</p>
+      <h2>From seven menu items to five, plus two clear actions.</h2>
+      <p>The menu now follows the questions visitors ask: who are you, what do you offer, where do you work, what has changed, and where can I read more.</p>
+    </div>
+    <div class="compare">
+      <div>
+        <p class="col-title">Current site <small>header navigation</small></p>
+        <ul class="tree">
+          <li><strong>About Us</strong><ul><li>Vision and Mission</li><li>Our Impact</li><li>Get Involved</li><li>Our Team</li></ul></li>
+          <li><strong>Our Work</strong> <span class="note">(services)</span><ul><li>Community Needs Assessment</li><li>Connection to Stakeholders</li><li>Impact Reporting</li><li>Inspire and Educate</li></ul></li>
+          <li><strong>Our Projects</strong> <span class="note">(page titled “Our Impact”)</span><ul><li>Kenya</li><li>Thailand</li><li>Indonesia</li><li>Travelife · Tourlink tiles</li></ul></li>
+          <li><strong>Resources</strong><ul><li>Community Tourism Insights</li><li>Impact Reports (coming soon)</li></ul></li>
+          <li><strong>Blog</strong> <span class="note">(separate from Resources)</span></li>
+          <li class="cta"><strong>Contact Us</strong> · <strong>Donate Now</strong> <span class="note">(two equal buttons)</span></li>
+        </ul>
+        <p class="note"><span class="flag">Overlap:</span> “Our Impact” appears under About Us and as the title of the projects page; <code>/fairtourism-services</code> shows the same page as <code>/projects</code>.</p>
+      </div>
+      <div>
+        <p class="col-title">Prototype <small>menu and page contents</small></p>
+        <ul class="tree">
+          <li><strong>About</strong><ul><li>Vision and mission</li><li>Our story</li><li>Team</li><li>Volunteer with us</li></ul></li>
+          <li><strong>What we do</strong><ul><li>Community needs assessment</li><li>Stakeholder connection</li><li>Impact reporting</li><li>Inspire and educate</li></ul></li>
+          <li><strong>Our work</strong><ul><li>Kayan · Thailand</li><li>Maasai · Kenya</li><li>Sasak · Indonesia</li><li>TOURLINK</li><li>Travelife Training</li></ul></li>
+          <li><strong>Our impact</strong><ul><li>Four grouped snapshots</li><li>What we pay attention to</li></ul></li>
+          <li><strong>Resources</strong><ul><li>Indigenous communities</li><li>Community Tourism 101</li><li>Blog</li><li>Reports &amp; publications</li><li>Partners</li></ul></li>
+          <li class="cta"><strong>Partner with us</strong> <span class="note">(secondary)</span> · <strong>Donate now</strong> <span class="note">(primary)</span></li>
+        </ul>
+        <p class="note">Each name now describes its content. Contact moves into “Partner with us”, and the contact form preselects the right topic when a visitor arrives from a service, a training page or the volunteer section.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="wireframes">
+    <div class="section-head">
+      <p class="label">Page wireframes</p>
+      <h2>Section order on the two most visited page types.</h2>
+      <div class="legend"><span><span class="tag new">New</span> added in the prototype</span><span><span class="tag moved">Moved</span> same content, new place</span><span><span class="tag cut">Merged</span> folded into another section</span></div>
+    </div>
+
+    <h3>Homepage</h3>
+    <div class="compare">
+      <div>
+        <p class="col-title">Current site</p>
+        <ol class="stack">
+          <li class="tall"><span>Hero film · “Uplifting Indigenous Communities”<small>Partner With Us · Support Us</small></span></li>
+          <li><span>Mission · download the two-pager</span></li>
+          <li class="tall"><span>Four service cards<small>three bullet points each</small></span><span class="tag cut">Merged</span></li>
+          <li><span>Our Work · three projects</span></li>
+          <li><span>Support banner · “Travel. Respect. Empower.”</span></li>
+          <li><span>Three articles</span></li>
+          <li><span>Learning &amp; Insights</span><span class="tag cut">Merged</span></li>
+          <li><span>Newsletter sign-up</span><span class="tag moved">Moved</span></li>
+          <li><span>Partner logos</span><span class="tag moved">Moved</span></li>
+          <li><span>“Tourism belongs to the people who live it” · Partner / Donate</span><span class="tag moved">Moved</span></li>
+          <li><span>Why Fair Tourism · three points</span></li>
+          <li><span>Footer</span></li>
+        </ol>
+      </div>
+      <div>
+        <p class="col-title">Prototype</p>
+        <ol class="stack">
+          <li class="tall"><span>Hero film · “Tourism belongs to the people who live it.”<small>Explore our work · Support the work · pause control</small></span><span class="tag moved">Moved</span></li>
+          <li><span>What we stand for, in two sentences</span></li>
+          <li class="tall"><span>What brings you here?<small>Discover projects · Explore a partnership · Support the work</small></span><span class="tag new">New</span></li>
+          <li class="tall"><span>How we work, together<small>five-step method as tabs</small></span><span class="tag new">New</span></li>
+          <li><span>Rooted in place · three community projects</span></li>
+          <li class="tall"><span>Progress, with context<small>two figures with source and caveat</small></span><span class="tag new">New</span></li>
+          <li><span>Support the work · where money goes</span></li>
+          <li><span>Good partnerships · who can work with us</span></li>
+          <li><span>Stories that open a window · three articles</span></li>
+          <li class="tall"><span>Footer<small>call to action, contact details, socials, newsletter</small></span></li>
+        </ol>
+      </div>
+    </div>
+
+    <h3>Project page</h3>
+    <div class="compare">
+      <div>
+        <p class="col-title">Current site <small>Thailand · Kayan</small></p>
+        <ol class="stack">
+          <li class="tall"><span>Hero image · community name</span></li>
+          <li><span>Why it matters</span></li>
+          <li><span>Quick facts in a side box</span><span class="tag moved">Moved</span></li>
+          <li><span>Key challenges · key activities</span></li>
+          <li><span>Approach · portrait film beside long text</span></li>
+          <li><span>Project goals</span></li>
+          <li><span>Partner with us OR support us</span></li>
+          <li><span>Partner logos</span></li>
+        </ol>
+      </div>
+      <div>
+        <p class="col-title">Prototype <small>Huay Pu Keng</small></p>
+        <ol class="stack">
+          <li class="tall"><span>Hero · place, community<small>Support this work · Explore a partnership</small></span></li>
+          <li class="tall"><span>Quick facts bar<small>lead · location · period · focus · scale</small></span><span class="tag moved">Moved</span></li>
+          <li><span>Why it matters</span></li>
+          <li><span>Key challenges · key activities · partners</span></li>
+          <li><span>Our approach</span></li>
+          <li><span>Project goals as numbered cards</span></li>
+          <li><span>On film · with source caption</span><span class="tag new">New</span></li>
+          <li><span>Community voice · consent note</span><span class="tag new">New</span></li>
+          <li><span>Continue exploring · other projects</span><span class="tag new">New</span></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="screens">
+    <div class="section-head">
+      <p class="label">Before and after</p>
+      <h2>First screen of each page, current site on the left.</h2>
+      <p>Desktop screenshots at 1440 × 900 px, taken in October 2026. The cookie banner on the current site is hidden.</p>
+    </div>
+
+    <article class="shot-pair">
+      <header><h3>Homepage at a glance</h3><p>Full-page view and phone view. The prototype is about a third shorter and every section has one job.</p></header>
+      <div class="tall-pair">
+        <figure><figcaption>Current · full page</figcaption><div class="scroller"><img src="img/home-orig-full.jpg" alt="Full-length screenshot of the current fairtourism.nl homepage" loading="lazy"></div></figure>
+        <figure><figcaption>Prototype · full page</figcaption><div class="scroller"><img src="img/home-proto-full.jpg" alt="Full-length screenshot of the prototype homepage" loading="lazy"></div></figure>
+        <figure class="phone"><figcaption>Current · phone</figcaption><img src="img/home-orig-mobile.jpg" alt="Current homepage at phone width" loading="lazy"></figure>
+        <figure class="phone"><figcaption>Prototype · phone</figcaption><img src="img/home-proto-mobile.jpg" alt="Prototype homepage at phone width" loading="lazy"></figure>
+      </div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Homepage</h3><p>Same hero film. The headline states the idea in one line, with one primary and one secondary button.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/home-orig.jpg" alt="Current homepage, first screen" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/home-proto.jpg" alt="Prototype homepage, first screen" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>About</h3><p>A clear page heading, then vision, mission, story, team, volunteering and an invitation to communities.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/about-orig.jpg" alt="Current About page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/about-proto.jpg" alt="Prototype About page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Service · Community needs assessment</h3><p>All seven “what you can expect” items stay; the enquiry goes to one shared form with this service preselected.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/service-orig.jpg" alt="Current Community Needs Assessment page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/service-proto.jpg" alt="Prototype Community needs assessment page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Projects overview</h3><p>Community projects first, then research, consultancy and training. Every card shows place, community and a one-line summary.</p></header>
+      <div class="shots"><figure><figcaption>Current site · “Our Impact”</figcaption><img src="img/work-orig.jpg" alt="Current projects page titled Our Impact" loading="lazy"></figure><figure><figcaption>Prototype · Our work</figcaption><img src="img/work-proto.jpg" alt="Prototype Our work page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Project · Kayan communities, Huay Pu Keng</h3><p>The facts that answer “who, where and since when” move to the first screen.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/project-orig.jpg" alt="Current Thailand project page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/project-proto.jpg" alt="Prototype Huay Pu Keng project page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Our impact</h3><p>A new page built from the two-pager figures, each with its definition and a reporting-period note.</p></header>
+      <div class="shots"><div class="empty-shot">No dedicated page on the current site.<br>The projects page carries the “Our Impact” title.</div><figure><figcaption>Prototype</figcaption><img src="img/impact-proto.jpg" alt="Prototype Our impact page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Resources</h3><p>From three category teasers to one library with search, topic filters and real articles on the first screen.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/resources-orig.jpg" alt="Current Resources page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/resources-proto.jpg" alt="Prototype Resources page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Donate</h3><p>The current page works through Donorbox. The prototype keeps the same amounts and shows the uses of funds beside them.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/donate-orig.jpg" alt="Current donation page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/donate-proto.jpg" alt="Prototype donation page" loading="lazy"></figure></div>
+    </article>
+
+    <article class="shot-pair">
+      <header><h3>Partner with us</h3><p>Three partner types, a role and topic selector, and a clear message after sending.</p></header>
+      <div class="shots"><figure><figcaption>Current site</figcaption><img src="img/contact-orig.jpg" alt="Current Become Our Partner page" loading="lazy"></figure><figure><figcaption>Prototype</figcaption><img src="img/contact-proto.jpg" alt="Prototype Partner with us page" loading="lazy"></figure></div>
+    </article>
+  </section>
+
+  <section id="pages">
+    <div class="section-head">
+      <p class="label">Page by page</p>
+      <h2>What changed on each page.</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Page</th><th>Current site</th><th>Prototype</th></tr></thead>
+        <tbody>
+          <tr><td>Home</td><td>Eleven sections; services, articles and partner logos compete for attention.</td><td>Intent-based entry points, five-step method, three projects, figures with context, three stories.</td></tr>
+          <tr><td>About</td><td>Mission and “Our Movement” repeat the same paragraph.</td><td>Vision, mission, story, team of seven, volunteer section with a volunteer quote, invitation to communities.</td></tr>
+          <tr><td>What we do</td><td>Each service page has its own enquiry form and a five-question FAQ.</td><td>Overview of four services; each detail page lists everything you can expect and links to one shared form with the topic preselected.</td></tr>
+          <tr><td>Our work</td><td>Three country links plus small Travelife and Tourlink tiles.</td><td>Three community project cards, then a research, consultancy and training section with two full pages.</td></tr>
+          <tr><td>Project pages</td><td>Long text; quick facts in a side box.</td><td>Quick-facts bar, why it matters, challenges and activities, approach, goals, film, community voice, related projects.</td></tr>
+          <tr><td>Our impact</td><td>No page.</td><td>Four grouped snapshots with definitions, four focus areas and a link to the projects behind the figures.</td></tr>
+          <tr><td>Resources</td><td>Insights, Blog and Impact Reports on separate pages.</td><td>One library: 13 articles with full text, 3 TOURLINK publications, brochure download, partner logos.</td></tr>
+          <tr><td>Donate</td><td>Donorbox form with one-time or monthly giving.</td><td>Same amounts, four uses of funds with concrete activities, “why now”, questions about giving.</td></tr>
+          <tr><td>Partner with us</td><td>First name, last name, email, message.</td><td>Name, email, role, topic and message; topic preselected from services, training and volunteering.</td></tr>
+          <tr><td>Footer</td><td>Some links point to the wrong page.</td><td>Email, address, KVK number, legal name, four social channels, newsletter, volunteer link.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="issues">
+    <div class="section-head">
+      <p class="label">Issues found</p>
+      <h2>Worth fixing on the current site, whether or not the redesign goes ahead.</h2>
+    </div>
+    <div class="lists">
+      <div class="box">
+        <h3>Content</h3>
+        <ul>
+          <li>The Travelife page shows an internal editing note: “Insert call to action button linking it to Kim de Leew”, followed by a staff email address.</li>
+          <li>The Sasak project page lists “X amount increase in visitors” as a key challenge.</li>
+          <li>The Thailand project film is a general South-East Asia travel montage, not footage from Huay Pu Keng.</li>
+          <li>Mission and “Our Movement” on the About page use identical text.</li>
+          <li>The Inspire &amp; Educate FAQ repeats the needs-assessment questions.</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Links and technical</h3>
+        <ul>
+          <li>Two TOURLINK research links point to the same Google Drive folder through a personal account path (<code>/drive/u/0/</code>), which outside visitors may not be able to open.</li>
+          <li>In the footer, “Knowledge Programs” and “Impact Reports” link to the Impact Reporting service page.</li>
+          <li>All partner logos use “Pink Poppy Flowers” as their image description.</li>
+          <li>A draft page, <code>/new-about-page</code>, is listed in the sitemap and can appear in search results.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="launch">
+    <div class="section-head">
+      <p class="label">Before launch</p>
+      <h2>What the team needs to confirm or provide.</h2>
+      <p>The prototype marks every unverified figure, date and quote as “to confirm” rather than presenting it as fact.</p>
+    </div>
+    <div class="lists">
+      <div class="box">
+        <h3>Facts and permissions</h3>
+        <ul>
+          <li>Reporting period and definition for each impact figure</li>
+          <li>Project start dates <span>(Sasak: 2024 in the two-pager, 2025 on the project page)</span></li>
+          <li>Current team list and photo permissions</li>
+          <li>Consent for community photos, quotes and films; replacement film for Huay Pu Keng</li>
+          <li>Public access to the TOURLINK research files</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>Content and build</h3>
+        <ul>
+          <li>Key challenges for the Sasak project; FAQ answers for the service pages</li>
+          <li>Replace the 84 sample entries in the resource library, which demonstrate browsing 100 items</li>
+          <li>Connect the donation block to the existing Donorbox form</li>
+          <li>Connect the contact and newsletter forms, with file upload for volunteer applications</li>
+          <li>Record a baseline in website analytics before launch so the redesign can be measured</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <p>Try the prototype: <a href="https://wyynnewang-nl.github.io/fair-tourism-website-redesign/">wyynnewang-nl.github.io/fair-tourism-website-redesign</a>. It includes a web view, a 390 px mobile view and a visual UI system page for both. Source code: <a href="https://github.com/wyynnewang-nl/fair-tourism-website-redesign">github.com/wyynnewang-nl/fair-tourism-website-redesign</a>.</p>
+    <p>Supporting notes in the project folder: <code>UX-REVIEW.md</code> (experience review and priorities), <code>CONTENT-GAPS.md</code> (content comparison with the current site), <code>UI-SYSTEM.md</code> (interface guidelines).</p>
+  </footer>
+</main>

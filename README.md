@@ -16,7 +16,7 @@ fairtourism.nl 改版的可交互原型，包含 Web 和手机两种预览。原
 
 **源代码**：https://github.com/wyynnewang-nl/fair-tourism-website-redesign
 
-**英文说明页**（改进总结、结构线框图、原站与原型对比截图）：https://claude.ai/artifact/VN6mCPNmJmfiwfdyoNk3ag 。该页面默认私密，需由所有者在页面的 Share 菜单中设置分享后，团队成员才能打开。
+**英文说明页**（改进总结、结构线框图、原站与原型对比截图）：https://wyynnewang-nl.github.io/fair-tourism-website-redesign/summary/ ，无需登录即可打开。同一内容也发布在 claude.ai：https://claude.ai/artifact/VN6mCPNmJmfiwfdyoNk3ag （需要登录，并由所有者在 Share 菜单中设置分享）。
 
 **当前网站**：https://www.fairtourism.nl
 
@@ -42,7 +42,7 @@ npm run dev
 - `WEBSITE-PAGE-FRAMES.md`：各页面的内容框架草图。
 - `UI-SYSTEM.md`：Web 与手机端界面规范。
 - `CONTENT-GAPS.md`：原站 35 个页面与原型的内容对比，以及已补回和待确认的内容。
-- `docs/redesign-summary/`：英文说明页的源文件和 21 张对比截图（2026 年 10 月拍摄），即上面 claude.ai 说明页发布的内容。用浏览器直接打开 `fair-tourism-redesign.html` 即可离线查看。
+- `docs/redesign-summary/`：英文说明页（`index.html`）和 21 张对比截图（2026 年 10 月拍摄）。部署时会复制到网站的 `/summary/` 路径；用浏览器直接打开 `index.html` 也可以离线查看。
 
 ## 内容来源与待确认事项
 
